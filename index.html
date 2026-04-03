@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform Development Proposal, Best Value Healthcare Services</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #152340;
+    --navy-light: #1E3358;
+    --teal: #00B88A;
+    --teal-light: #00D4A0;
+    --teal-pale: #E8FAF5;
+    --teal-muted: #C5EFE3;
+    --white: #FFFFFF;
+    --off-white: #F8FAFB;
+    --text: #1A2B3C;
+    --text-mid: #4A5568;
+    --text-light: #8A96A3;
+    --border: #E2E8F0;
+    --gold: #C9A84C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,184,138,0.15);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,184,138,0.1);
+  }
+
+  .cover-corner-lines {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+  }
+  .cover-corner-lines::before {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,184,138,0.12);
+  }
+  .cover-corner-lines::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,184,138,0.08);
+  }
+
+  .cover-top-bar {
+    padding: 32px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .agency-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .doc-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid rgba(0,184,138,0.35);
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  .cover-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-mark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), var(--teal-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 40px;
+    box-shadow: 0 0 0 12px rgba(0,184,138,0.1), 0 0 0 24px rgba(0,184,138,0.05);
+  }
+
+  .cover-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+  }
+
+  .cover-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .cover-doc-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 48px;
+    letter-spacing: 0.04em;
+  }
+
+  .cover-divider {
+    width: 64px;
+    height: 3px;
+    background: var(--teal);
+    margin-bottom: 40px;
+    border-radius: 2px;
+  }
+
+  .cover-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    max-width: 540px;
+    line-height: 1.5;
+  }
+
+  .cover-footer {
+    padding: 36px 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cover-meta-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .cover-meta-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--teal);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .section-intro {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  /* ── EXECUTIVE SUMMARY ── */
+  .summary-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .summary-card {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--teal);
+  }
+
+  .summary-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--teal-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .summary-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .summary-card-text {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  /* ── JOURNEY STEPS ── */
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .journey::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(to right, var(--teal), var(--teal-light));
+    opacity: 0.3;
+    z-index: 0;
+  }
+
+  .journey-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .journey-num {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 16px;
+    border: 2px solid var(--teal);
+    flex-shrink: 0;
+  }
+
+  .journey-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .journey-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .feature-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .feature-block-header {
+    background: var(--navy);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .feature-block-icon {
+    font-size: 20px;
+  }
+
+  .feature-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .feature-block-body {
+    padding: 20px 24px;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  /* ── TECH STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stack-card {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 18px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .stack-card-icon {
+    font-size: 26px;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .stack-card-role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .stack-card-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--teal), rgba(0,184,138,0.1));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 32px;
+    padding-left: 60px;
+    padding-bottom: 36px;
+    position: relative;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--teal);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--teal);
+    z-index: 1;
+  }
+
+  .timeline-phase {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .timeline-duration {
+    display: inline-block;
+    background: var(--teal-pale);
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    font-size: 13.5px;
+    color: var(--text-mid);
+  }
+
+  .timeline-total {
+    margin-top: 32px;
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .timeline-total-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .timeline-total-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  /* ── PRICING TABLE ── */
+  .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .pricing-table thead tr {
+    background: var(--navy);
+  }
+
+  .pricing-table thead th {
+    padding: 16px 24px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .pricing-table thead th:last-child {
+    text-align: right;
+  }
+
+  .pricing-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .pricing-table tbody tr:hover {
+    background: var(--off-white);
+  }
+
+  .pricing-table tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .pricing-table tbody td {
+    padding: 16px 24px;
+    font-size: 14px;
+    color: var(--text-mid);
+  }
+
+  .pricing-table tbody td:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .pricing-table tfoot tr {
+    background: var(--navy);
+  }
+
+  .pricing-table tfoot td {
+    padding: 18px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .pricing-table tfoot td:last-child {
+    text-align: right;
+    color: var(--teal);
+  }
+
+  .pricing-note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-light);
+    font-style: italic;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .pricing-note::before {
+    content: '*';
+    color: var(--teal);
+    font-style: normal;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── COST JUSTIFICATION ── */
+  .justify-intro {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    max-width: 720px;
+    margin-bottom: 40px;
+  }
+
+  .cost-vs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .cost-vs-card {
+    border-radius: 10px;
+    padding: 28px;
+    border: 1px solid var(--border);
+  }
+
+  .cost-vs-card.without {
+    background: #FEF6F6;
+    border-color: #FCCACA;
+  }
+
+  .cost-vs-card.with {
+    background: var(--teal-pale);
+    border-color: var(--teal-muted);
+  }
+
+  .cost-vs-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cost-vs-card.without .cost-vs-label { color: #C53030; }
+  .cost-vs-card.with .cost-vs-label { color: var(--teal); }
+
+  .cost-vs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cost-vs-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .cost-vs-card.without .cost-vs-list li { color: #742A2A; }
+  .cost-vs-card.with .cost-vs-list li { color: #065F46; }
+
+  .cost-vs-card.without .cost-vs-list li::before {
+    content: '✕';
+    font-size: 11px;
+    font-weight: 700;
+    color: #C53030;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .cost-vs-card.with .cost-vs-list li::before {
+    content: '✓';
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .roi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .roi-card {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .roi-card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .roi-card-metric {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 4px;
+    line-height: 1;
+  }
+
+  .roi-card-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.4;
+  }
+
+  .build-vs-hire {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .build-vs-hire table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .build-vs-hire thead tr {
+    background: var(--navy);
+  }
+
+  .build-vs-hire thead th {
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .build-vs-hire tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .build-vs-hire tbody tr:last-child { border-bottom: none; }
+
+  .build-vs-hire tbody td {
+    padding: 13px 20px;
+    font-size: 13.5px;
+    color: var(--text-mid);
+    vertical-align: top;
+  }
+
+  .build-vs-hire tbody td:first-child {
+    font-weight: 600;
+    color: var(--text);
+    width: 30%;
+  }
+
+  .tag-bad {
+    display: inline-block;
+    background: #FEE2E2;
+    color: #C53030;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .tag-good {
+    display: inline-block;
+    background: var(--teal-pale);
+    color: #065F46;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* ── FORM INPUTS ── */
+  .clarify-name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-light);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--teal-muted);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+
+  .form-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,184,138,0.12);
+  }
+
+  .form-input::placeholder { color: var(--text-light); }
+
+  textarea.form-input { min-height: 72px; line-height: 1.6; }
+
+  .form-submit-row {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .form-submit-btn {
+    background: var(--teal);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .form-submit-btn:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .form-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  .form-status {
+    font-size: 13.5px;
+    font-weight: 500;
+    display: none;
+  }
+
+  .form-status.success { color: var(--teal); display: block; }
+  .form-status.error { color: #C53030; display: block; }
+
+  .form-success-block {
+    display: none;
+    background: var(--teal-pale);
+    border: 1px solid var(--teal-muted);
+    border-radius: 10px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .form-success-block.visible { display: block; }
+
+  .form-success-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .form-success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .form-success-msg {
+    font-size: 14px;
+    color: var(--text-mid);
+  }
+
+  /* ── CLARIFICATION QUESTIONS ── */
+  .clarify-wrapper {
+    background: linear-gradient(135deg, #E8FAF5 0%, #F0FDF8 100%);
+    border: 1px solid var(--teal-muted);
+    border-radius: 12px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .clarify-wrapper::before {
+    content: '?';
+    position: absolute;
+    right: -20px;
+    top: -30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    font-weight: 700;
+    color: rgba(0,184,138,0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .clarify-header {
+    margin-bottom: 32px;
+  }
+
+  .clarify-badge {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .clarify-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .clarify-subtitle {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    max-width: 580px;
+  }
+
+  .clarify-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .clarify-q {
+    background: var(--white);
+    border: 1px solid var(--teal-muted);
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+
+  .clarify-q-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+
+  .clarify-q-text {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  .clarify-q-hint {
+    font-size: 12.5px;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+
+  .clarify-answer-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .clarify-answer-line {
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      var(--teal-muted) 0,
+      var(--teal-muted) 8px,
+      transparent 8px,
+      transparent 16px
+    );
+    margin-bottom: 6px;
+  }
+
+  .clarify-answer-line + .clarify-answer-line {
+    opacity: 0.4;
+  }
+
+  /* ── NEXT STEPS ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .step-card {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--teal);
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(0,184,138,0.15);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .step-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  .cta-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .cta-text-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .cta-text-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .cta-btn {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .cta-btn:hover {
+    background: var(--teal-light);
+    transform: translateY(-1px);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    padding: 36px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .footer-company {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .cover { min-height: 100vh; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .features-grid, .stack-grid, .steps-grid { page-break-inside: avoid; }
+    .clarify-wrapper { page-break-inside: avoid; }
+    body { font-size: 13px; }
+    .cta-btn { -webkit-print-color-adjust: exact; }
+  }
+
+  @media (max-width: 768px) {
+    .cover-company { font-size: 36px; }
+    .content { padding: 0 24px; }
+    .cover-body { padding: 0 24px; }
+    .cover-top-bar, .cover-footer, .footer { padding: 24px; }
+    .summary-cards, .features-grid { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .journey { grid-template-columns: 1fr; gap: 24px; }
+    .journey::before { display: none; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .cta-block { flex-direction: column; align-items: flex-start; }
+    .cover-footer { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-corner-lines"></div>
+
+  <div class="cover-top-bar">
+    <span class="agency-name">AP Systems</span>
+    <span class="doc-badge">Confidential Proposal</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="logo-mark">BVHS</div>
+
+    <div class="cover-label">Platform Development Proposal</div>
+
+    <h1 class="cover-company">Best Value<br>Healthcare<br>Services</h1>
+    <div class="cover-doc-title">Aide Onboarding &amp; Shift Management Platform</div>
+
+    <div class="cover-divider"></div>
+
+    <p class="cover-tagline">"Digitizing Your Aide Onboarding &amp; Shift Management, End to End."</p>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Prepared For</span>
+      <span class="cover-meta-value">Best Value Healthcare Services</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Prepared By</span>
+      <span class="cover-meta-value">AP Systems</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Date Issued</span>
+      <span class="cover-meta-value">April 2, 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<div class="content">
+
+  <!-- ── SECTION 1: EXECUTIVE SUMMARY ── -->
+  <div class="section">
+    <div class="section-label">01: Overview</div>
+    <h2 class="section-title">Executive Summary</h2>
+    <p class="section-intro">
+      Best Value Healthcare Services currently manages aide onboarding and shift scheduling through manual or fragmented processes. This proposal outlines a modern digital platform that streamlines the full aide lifecycle, from application and document verification, through admin approval, to mobile-based shift management.
+    </p>
+
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="summary-card-icon">🌐</div>
+        <div class="summary-card-title">Web Onboarding Portal</div>
+        <p class="summary-card-text">
+          Aides register online, upload all required compliance documents, and track their application status in real time. Admins review, approve, or reject applicants from a centralized dashboard.
+        </p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-icon">📱</div>
+        <div class="summary-card-title">Mobile Shift Management App</div>
+        <p class="summary-card-text">
+          Once approved, aides download the app and immediately access the shift board, browsing open client shifts, claiming with one tap, dropping when needed, and receiving push notifications for new opportunities.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: USER JOURNEY ── -->
+  <div class="section">
+    <div class="section-label">02: How It Works</div>
+    <h2 class="section-title">The Aide Journey</h2>
+    <p class="section-intro">From first visit to first shift, a seamless five-step digital experience.</p>
+
+    <div class="journey">
+      <div class="journey-step">
+        <div class="journey-num">1</div>
+        <div class="journey-title">Aide Signs Up</div>
+        <div class="journey-sub">Web portal, completes profile &amp; registration form</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">2</div>
+        <div class="journey-title">Uploads Documents</div>
+        <div class="journey-sub">License, CPR cert, ID, background check &amp; more</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">3</div>
+        <div class="journey-title">Admin Reviews</div>
+        <div class="journey-sub">Dashboard review, one-click approve or reject</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">4</div>
+        <div class="journey-title">Downloads the App</div>
+        <div class="journey-sub">Approval triggers email &amp; SMS with app link</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">5</div>
+        <div class="journey-title">Picks Shifts</div>
+        <div class="journey-sub">Mobile shift board, claim, drop &amp; track shifts</div>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">6</div>
+        <div class="journey-title">Syncs to CRM</div>
+        <div class="journey-sub">Every action logged, your CRM stays current automatically</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: FEATURES ── -->
+  <div class="section">
+    <div class="section-label">03: Features</div>
+    <h2 class="section-title">Platform Feature Breakdown</h2>
+    <p class="section-intro">Four integrated modules, all connected to your CRM, working together as one cohesive system.</p>
+
+    <div class="features-grid">
+      <div class="feature-block">
+        <div class="feature-block-header">
+          <span class="feature-block-icon">🌐</span>
+          <span class="feature-block-title">Web Onboarding Portal</span>
+        </div>
+        <div class="feature-block-body">
+          <ul class="feature-list">
+            <li>Aide registration form, name, contact, credentials, experience</li>
+            <li>Multi-document upload with drag &amp; drop + mobile camera capture</li>
+            <li>Real-time status tracker: Pending → Under Review → Approved / Rejected</li>
+            <li>Email &amp; SMS notification on every status change</li>
+            <li>Secure, encrypted document storage (AWS S3)</li>
+            <li>New aide records automatically created in your CRM on approval</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="feature-block-header">
+          <span class="feature-block-icon">🖥️</span>
+          <span class="feature-block-title">Admin Dashboard (Web)</span>
+        </div>
+        <div class="feature-block-body">
+          <ul class="feature-list">
+            <li>View all applicant submissions in one place</li>
+            <li>Review uploaded documents in-browser, no downloads needed</li>
+            <li>One-click approve or reject with optional notes to applicant</li>
+            <li>Bulk actions across multiple applicants</li>
+            <li>Full audit log of every admin action</li>
+            <li>Approval status synced to CRM in real time, no manual data entry</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block" style="grid-column: 1 / -1;">
+        <div class="feature-block-header">
+          <span class="feature-block-icon">📱</span>
+          <span class="feature-block-title">Mobile App: Shift Management (iOS &amp; Android)</span>
+        </div>
+        <div class="feature-block-body">
+          <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px;">
+            <li>Approved-only login, tied directly to application status</li>
+            <li>Claim a shift with a single tap, instant confirmation</li>
+            <li>Shift board: browse by date, time, location, client name</li>
+            <li>Drop a shift (configurable notice window, TBD)</li>
+            <li>Push notifications: new shifts, reminders, approval status</li>
+            <li>In-app profile viewer &amp; document wallet</li>
+            <li>Shift history log, full record of past and upcoming shifts</li>
+            <li>Real-time updates when new shifts are posted</li>
+            <li>Shift completions logged to CRM automatically</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block" style="grid-column: 1 / -1;">
+        <div class="feature-block-header">
+          <span class="feature-block-icon">🔗</span>
+          <span class="feature-block-title">CRM Integration: Everything Connected</span>
+        </div>
+        <div class="feature-block-body">
+          <ul class="feature-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px;">
+            <li>Every approved aide is pushed to your CRM as a contact automatically</li>
+            <li>Application status updates sync in real time, no double entry</li>
+            <li>Shifts claimed and dropped are logged against the aide's CRM record</li>
+            <li>Document expiration dates tracked and flagged inside your CRM</li>
+            <li>Trigger CRM automations on approval, welcome sequences, onboarding tasks</li>
+            <li>Shift history visible per aide directly from their CRM profile</li>
+            <li>Two-way sync, changes in your CRM reflect in the platform</li>
+            <li>Compatible with major CRMs (GoHighLevel, HubSpot, Salesforce, and more)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: TECH STACK ── -->
+  <div class="section">
+    <div class="section-label">04: Technology</div>
+    <h2 class="section-title">Recommended Tech Stack</h2>
+    <p class="section-intro">Modern, proven, scalable, built to grow with your business.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <span class="stack-card-icon">⚛️</span>
+        <div class="stack-card-role">Web Frontend</div>
+        <div class="stack-card-name">React / Next.js</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">📱</span>
+        <div class="stack-card-role">Mobile App</div>
+        <div class="stack-card-name">React Native (iOS + Android)</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">⚙️</span>
+        <div class="stack-card-role">Backend API</div>
+        <div class="stack-card-name">Node.js + PostgreSQL</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">🔒</span>
+        <div class="stack-card-role">Document Storage</div>
+        <div class="stack-card-name">AWS S3 (Encrypted)</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">🔑</span>
+        <div class="stack-card-role">Authentication</div>
+        <div class="stack-card-name">JWT + Role-Based Access</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">🔔</span>
+        <div class="stack-card-role">Push Notifications</div>
+        <div class="stack-card-name">Firebase Cloud Messaging</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">☁️</span>
+        <div class="stack-card-role">Hosting</div>
+        <div class="stack-card-name">AWS / Vercel</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">📧</span>
+        <div class="stack-card-role">Notifications</div>
+        <div class="stack-card-name">Email + SMS (Twilio / SendGrid)</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">🔗</span>
+        <div class="stack-card-role">CRM Integration</div>
+        <div class="stack-card-name">GoHighLevel / HubSpot / Salesforce (via API)</div>
+      </div>
+      <div class="stack-card">
+        <span class="stack-card-icon">📊</span>
+        <div class="stack-card-role">Analytics Dashboard</div>
+        <div class="stack-card-name">Custom Metrics Layer (Optional)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: TIMELINE ── -->
+  <div class="section">
+    <div class="section-label">05: Timeline</div>
+    <h2 class="section-title">Project Timeline</h2>
+    <p class="section-intro">Three focused phases, from kickoff to live deployment in approximately 11 weeks.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-phase">Phase 1</div>
+          <div class="timeline-title">Web Portal + Admin Dashboard</div>
+          <span class="timeline-duration">Weeks 1 to 4</span>
+          <p class="timeline-desc">Design, build, and test the aide-facing onboarding portal and the admin approval dashboard. Document upload, status tracking, and email/SMS notifications.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-phase">Phase 2</div>
+          <div class="timeline-title">Mobile App Development</div>
+          <span class="timeline-duration">Weeks 5 to 9</span>
+          <p class="timeline-desc">Build the iOS &amp; Android shift management app, shift board, claim/drop flows, push notifications, profile wallet, and shift history. One codebase, two platforms.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-phase">Phase 3</div>
+          <div class="timeline-title">QA, Testing &amp; Deployment</div>
+          <span class="timeline-duration">Weeks 10 to 11</span>
+          <p class="timeline-desc">End-to-end testing across all user flows, bug fixes, App Store / Play Store submissions, and live deployment with a monitored launch period.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-total">
+      <div class="timeline-total-label">Estimated Total Duration</div>
+      <div class="timeline-total-value">~11 Weeks from Kickoff</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 6: INVESTMENT ── -->
+  <div class="section">
+    <div class="section-label">06: Investment</div>
+    <h2 class="section-title">Project Investment</h2>
+    <p class="section-intro">Placeholder pricing, firm figures issued after the clarification questions below are reviewed. The final price depends entirely on the features you choose to include in the project.</p>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Investment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Discovery, Design &amp; Architecture</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>Web Onboarding Portal</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>Admin Dashboard</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>Mobile App (iOS + Android)</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>Backend Infrastructure &amp; API</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>QA, Testing &amp; Deployment</td>
+          <td>$[X]</td>
+        </tr>
+        <tr>
+          <td>CRM Integration</td>
+          <td>$[X]</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total Project Investment</td>
+          <td>$[To Be Confirmed]</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <p class="pricing-note">Final pricing will be confirmed once the clarification questions in the section below have been reviewed and a discovery call is completed. Every number above is a placeholder. The actual total is determined by which features you want built.</p>
+
+    <div style="margin-top: 28px; background: var(--navy); border-radius: 10px; padding: 28px 32px;">
+      <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px;">Optional Add-On</div>
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 280px;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 8px;">📊 Operations Monitoring Dashboard</div>
+          <p style="font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 12px;">A real-time owner-facing dashboard giving you a live view of your entire operation, aides, shifts, CRM pipeline, and document compliance, all in one place.</p>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 7px;">
+            <li style="font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 9px; align-items: flex-start;"><span style="color: var(--teal); flex-shrink: 0;">→</span> Live count of active aides, pending applicants, open shifts</li>
+            <li style="font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 9px; align-items: flex-start;"><span style="color: var(--teal); flex-shrink: 0;">→</span> Shift fill rate, how many open shifts are being claimed vs. sitting open</li>
+            <li style="font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 9px; align-items: flex-start;"><span style="color: var(--teal); flex-shrink: 0;">→</span> Document compliance tracker, flag aides with expiring or missing docs</li>
+            <li style="font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 9px; align-items: flex-start;"><span style="color: var(--teal); flex-shrink: 0;">→</span> CRM pipeline summary, new leads, approvals this week, conversion rate</li>
+            <li style="font-size: 13px; color: rgba(255,255,255,0.6); display: flex; gap: 9px; align-items: flex-start;"><span style="color: var(--teal); flex-shrink: 0;">→</span> Trend charts, aide growth, shift volume, and drop rate over time</li>
+          </ul>
+        </div>
+        <div style="text-align: center; flex-shrink: 0;">
+          <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--teal);">$[X]</div>
+          <div style="font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px;">Add-on pricing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 7: COST JUSTIFICATION ── -->
+  <div class="section">
+    <div class="section-label">07: Why It's Worth It</div>
+    <h2 class="section-title">Justifying the Investment</h2>
+    <p class="justify-intro">
+      A custom platform is not an expense, it's the operational infrastructure your business runs on. Here is why the investment pays for itself faster than most owners expect.
+    </p>
+
+    <!-- WITHOUT vs WITH -->
+    <div class="cost-vs">
+      <div class="cost-vs-card without">
+        <div class="cost-vs-label">❌ &nbsp;Without This Platform</div>
+        <ul class="cost-vs-list">
+          <li>Aides submit documents by email, text, or paper, staff spends hours chasing and filing manually</li>
+          <li>No single view of who is approved, pending, or missing documents</li>
+          <li>Shift scheduling done by phone calls, group chats, or spreadsheets</li>
+          <li>Aides miss shifts or double-book due to miscommunication</li>
+          <li>No accountability trail, disputes are hard to resolve</li>
+          <li>Onboarding a new aide takes days instead of hours</li>
+          <li>Growth is bottlenecked by administrative capacity</li>
+        </ul>
+      </div>
+      <div class="cost-vs-card with">
+        <div class="cost-vs-label">✓ &nbsp;With This Platform</div>
+        <ul class="cost-vs-list">
+          <li>Aides self-onboard online, documents collected automatically, no back-and-forth</li>
+          <li>Admin sees every applicant's status in real time from one dashboard</li>
+          <li>Shifts posted once, aides claim instantly from their phone</li>
+          <li>Push notifications ensure aides never miss a new shift opportunity</li>
+          <li>Full audit log of every action, disputes resolved in seconds</li>
+          <li>New aide onboarded and shift-ready in under 24 hours</li>
+          <li>Operations scale without adding administrative headcount</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ROI METRICS -->
+    <div class="roi-grid">
+      <div class="roi-card">
+        <span class="roi-card-icon">⏱️</span>
+        <div class="roi-card-metric">10+ hrs</div>
+        <div class="roi-card-label">Admin time saved per week on onboarding &amp; scheduling</div>
+      </div>
+      <div class="roi-card">
+        <span class="roi-card-icon">📋</span>
+        <div class="roi-card-metric">3x faster</div>
+        <div class="roi-card-label">Aide onboarding, days reduced to under 24 hours</div>
+      </div>
+      <div class="roi-card">
+        <span class="roi-card-icon">📱</span>
+        <div class="roi-card-metric">Zero calls</div>
+        <div class="roi-card-label">Shift filling handled entirely through the app, no phone coordination</div>
+      </div>
+    </div>
+
+    <!-- BUILD VS HIRE TABLE -->
+    <div class="build-vs-hire">
+      <table>
+        <thead>
+          <tr>
+            <th>Comparison</th>
+            <th>Manual / Status Quo</th>
+            <th>This Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Onboarding an aide</td>
+            <td><span class="tag-bad">3 to 7 days</span> of emails and follow-ups</td>
+            <td><span class="tag-good">Under 24 hrs</span>, self-service, automated notifications</td>
+          </tr>
+          <tr>
+            <td>Filling an open shift</td>
+            <td><span class="tag-bad">30 to 60 min</span> of calls and messages per shift</td>
+            <td><span class="tag-good">Under 5 min</span>, posted once, claimed via app</td>
+          </tr>
+          <tr>
+            <td>Document compliance</td>
+            <td><span class="tag-bad">Manual tracking</span>, easy to miss expirations</td>
+            <td><span class="tag-good">Centralized</span>, all docs visible, auditable, organized</td>
+          </tr>
+          <tr>
+            <td>Scaling from 20 to 100 aides</td>
+            <td><span class="tag-bad">Requires hiring</span> more admin staff to handle volume</td>
+            <td><span class="tag-good">No added headcount</span>, platform handles the load</td>
+          </tr>
+          <tr>
+            <td>Admin cost per month (est.)</td>
+            <td><span class="tag-bad">$2,500 to $4,000/mo</span> in staff time managing manually</td>
+            <td><span class="tag-good">Platform pays for itself</span> within 8 to 12 months</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── SECTION 8: CLARIFICATION QUESTIONS ── -->
+  <div class="section">
+    <div class="section-label">08: Scope Alignment</div>
+    <h2 class="section-title">Before We Finalize</h2>
+
+    <div class="clarify-wrapper">
+      <div class="clarify-header">
+        <div class="clarify-badge">Action Required</div>
+        <h3 class="clarify-title">Please Answer the Following</h3>
+        <p class="clarify-subtitle">Your answers allow us to lock in the exact scope and provide firm pricing. Please fill in below or bring these to our next discovery call.</p>
+      </div>
+
+      <form id="proposalForm" class="clarify-questions" onsubmit="submitForm(event)">
+
+        <div class="clarify-name-row">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Your Name</label>
+            <input class="form-input" type="text" id="f-name" name="name" placeholder="Full name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Your Email</label>
+            <input class="form-input" type="email" id="f-email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 01</div>
+          <div class="clarify-q-text">What documents are aides required to upload during onboarding?</div>
+          <div class="clarify-q-hint">e.g., HHA license, CPR certification, government-issued ID, TB test, background check authorization, other?</div>
+          <textarea class="form-input" name="q1" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 02</div>
+          <div class="clarify-q-text">Who reviews and approves applicants, one administrator, or multiple team members?</div>
+          <textarea class="form-input" name="q2" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 03</div>
+          <div class="clarify-q-text">How are shifts created in the system?</div>
+          <div class="clarify-q-hint">Does an admin post them manually, or are they generated from a recurring schedule?</div>
+          <textarea class="form-input" name="q3" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 04</div>
+          <div class="clarify-q-text">Is there a minimum notice window for dropping a shift?</div>
+          <div class="clarify-q-hint">e.g., Aides must drop at least 24 hours before the shift starts.</div>
+          <textarea class="form-input" name="q4" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 05</div>
+          <div class="clarify-q-text">Should shifts be matched to aides based on any criteria?</div>
+          <div class="clarify-q-hint">e.g., Location/distance, specific credentials required, client preference for a particular aide.</div>
+          <textarea class="form-input" name="q5" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 06</div>
+          <div class="clarify-q-text">Will clients (patients or their families) need any access to the platform, or is this aide-facing only?</div>
+          <textarea class="form-input" name="q6" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 07</div>
+          <div class="clarify-q-text">Do you need the mobile app on both iOS and Android, or would you like to launch one platform first?</div>
+          <textarea class="form-input" name="q7" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 08</div>
+          <div class="clarify-q-text">Do aides need access to the shift board on a web browser as well, or mobile app only?</div>
+          <textarea class="form-input" name="q8" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 09</div>
+          <div class="clarify-q-text">Does this system need to connect with any existing payroll, HR, or scheduling software?</div>
+          <div class="clarify-q-hint">e.g., ADP, QuickBooks, existing scheduling tools.</div>
+          <textarea class="form-input" name="q9" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="clarify-q">
+          <div class="clarify-q-num">Question 10</div>
+          <div class="clarify-q-text">Approximately how many aides do you expect to onboard at launch?</div>
+          <div class="clarify-q-hint">This helps us size the infrastructure correctly from day one.</div>
+          <textarea class="form-input" name="q10" placeholder="Type your answer here..." rows="3"></textarea>
+        </div>
+
+        <div class="form-submit-row">
+          <button type="submit" class="form-submit-btn" id="submitBtn">Send My Answers to AP Systems</button>
+          <span class="form-status" id="formStatus"></span>
+        </div>
+
+      </form>
+
+      <div class="form-success-block" id="successBlock">
+        <div class="form-success-icon">✅</div>
+        <div class="form-success-title">Answers Submitted Successfully</div>
+        <p class="form-success-msg">Thank you. The AP Systems team has received your responses and will follow up with a revised proposal and firm pricing within 48 hours.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    async function submitForm(e) {
+      e.preventDefault();
+      const btn    = document.getElementById('submitBtn');
+      const status = document.getElementById('formStatus');
+      const form   = document.getElementById('proposalForm');
+
+      const WEBHOOK_URL = 'https://n8n.srv1180913.hstgr.cloud/webhook/bvh-proposal';
+
+      const data = {};
+      new FormData(form).forEach((val, key) => { data[key] = val; });
+      data.company = 'Best Value Healthcare Services';
+
+      btn.disabled    = true;
+      btn.textContent = 'Sending...';
+      status.className = 'form-status';
+      status.textContent = '';
+
+      try {
+        const res = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          document.getElementById('successBlock').classList.add('visible');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        status.className   = 'form-status error';
+        status.textContent = 'Something went wrong. Please email adiorahonuora@gmail.com directly.';
+        btn.disabled    = false;
+        btn.textContent = 'Send My Answers to AP Systems';
+      }
+    }
+  </script>
+
+  <!-- ── SECTION 8: NEXT STEPS ── -->
+  <div class="section">
+    <div class="section-label">09: Next Steps</div>
+    <h2 class="section-title">How We Move Forward</h2>
+    <p class="section-intro">Three simple steps from this proposal to a signed agreement and project kickoff.</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-title">Review &amp; Respond</div>
+        <p class="step-desc">Review this proposal and complete the clarification questions above at your earliest convenience.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-title">Discovery Call</div>
+        <p class="step-desc">A 30-minute call to align on scope, answer any questions, and walk through the platform vision together.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-title">Revised Proposal</div>
+        <p class="step-desc">Firm pricing and confirmed timeline issued within 48 hours of the discovery call. Ready to sign and kick off.</p>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <div>
+        <div class="cta-text-title">Ready to take the first step?</div>
+        <div class="cta-text-sub">Book a 30-minute discovery call, no commitment required.</div>
+      </div>
+      <a href="https://calendly.com/adiorahonuora/new-meeting" target="_blank" class="cta-btn">Schedule Your Discovery Call →</a>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<div class="footer">
+  <div class="footer-left">
+    <div class="footer-logo">BVHS</div>
+    <div class="footer-company">Best Value Healthcare Services</div>
+  </div>
+  <div class="footer-right">
+    Proposal prepared by AP Systems &nbsp;|&nbsp; April 2, 2026<br>
+    Confidential, prepared exclusively for Best Value Healthcare Services
+  </div>
+</div>
+
+</body>
+</html>
