@@ -1,0 +1,76 @@
+{
+  "name": "Best Value Healthcare: Proposal Form Submission",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "bvh-proposal",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "bvh-0001-0001-0001-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\n\nconst name    = body.name    || '(not provided)';\nconst company = body.company || 'Best Value Healthcare Services';\nconst email   = body.email   || '(not provided)';\n\nconst questions = [\n  'What documents are aides required to upload during onboarding?',\n  'Who reviews and approves applicants?',\n  'How are shifts created in the system?',\n  'Is there a minimum notice window for dropping a shift?',\n  'Should shifts be matched to aides based on any criteria?',\n  'Will clients or their families need any access to the platform?',\n  'Do you need the mobile app on both iOS and Android?',\n  'Do aides need web browser access to the shift board as well?',\n  'Does this system need to connect with any existing payroll or HR software?',\n  'Approximately how many aides do you expect to onboard at launch?'\n];\n\nlet htmlRows = '';\nfor (let i = 1; i <= 10; i++) {\n  const answer = body[`q${i}`] || '<em style=\"color:#999\">No answer provided</em>';\n  const bg = i % 2 === 0 ? '#f8fafb' : '#ffffff';\n  htmlRows += `\n    <tr>\n      <td style=\"padding:14px 18px;background:${bg};border-bottom:1px solid #e2e8f0;font-size:13px;font-weight:700;color:#0A1628;width:42%;vertical-align:top\">Q${i}. ${questions[i-1]}</td>\n      <td style=\"padding:14px 18px;background:${bg};border-bottom:1px solid #e2e8f0;font-size:13px;color:#4a5568;vertical-align:top\">${answer}</td>\n    </tr>`;\n}\n\nconst html = `<!DOCTYPE html>\n<html><body style=\"margin:0;padding:0;font-family:Arial,sans-serif;background:#f0f4f8\">\n<div style=\"max-width:680px;margin:32px auto;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)\">\n  <div style=\"background:#0A1628;padding:32px 36px\">\n    <p style=\"margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#00B88A\">AP Systems</p>\n    <h1 style=\"margin:0 0 6px;font-size:22px;font-weight:700;color:#ffffff\">Proposal Questions Answered</h1>\n    <p style=\"margin:0;font-size:14px;color:rgba(255,255,255,0.5)\">Best Value Healthcare Services has responded to your clarification questions.</p>\n  </div>\n  <div style=\"padding:24px 36px;background:#f8fafb;border-bottom:1px solid #e2e8f0\">\n    <table style=\"width:100%;border-collapse:collapse\">\n      <tr>\n        <td style=\"font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#00B88A;padding-bottom:4px\">Name</td>\n        <td style=\"font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#00B88A;padding-bottom:4px\">Company</td>\n        <td style=\"font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#00B88A;padding-bottom:4px\">Email</td>\n      </tr>\n      <tr>\n        <td style=\"font-size:15px;font-weight:600;color:#0A1628;padding-right:24px\">${name}</td>\n        <td style=\"font-size:15px;font-weight:600;color:#0A1628;padding-right:24px\">${company}</td>\n        <td style=\"font-size:15px;font-weight:600;color:#0A1628\">${email}</td>\n      </tr>\n    </table>\n  </div>\n  <div style=\"padding:28px 36px\">\n    <h2 style=\"font-size:15px;font-weight:700;color:#0A1628;margin:0 0 16px;letter-spacing:0.04em\">ANSWERS</h2>\n    <table style=\"width:100%;border-collapse:collapse;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden\">\n      ${htmlRows}\n    </table>\n  </div>\n  <div style=\"padding:20px 36px;background:#0A1628;text-align:center\">\n    <p style=\"margin:0;font-size:12px;color:rgba(255,255,255,0.35)\">Sent via AP Systems Proposal System</p>\n  </div>\n</div>\n</body></html>`;\n\nreturn [{ json: { html, name, company, email } }];"
+      },
+      "id": "bvh-0002-0002-0002-000000000002",
+      "name": "Format Email",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "admin@lifechangersfs.com",
+        "toEmail": "adiorahonuora@gmail.com",
+        "subject": "=Best Value Healthcare: Proposal Questions Answered by {{ $json.name }}",
+        "emailType": "html",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "id": "bvh-0003-0003-0003-000000000003",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [720, 300],
+      "credentials": {
+        "smtp": {
+          "id": "TmGBFzzxRRcnVoDH",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"success\":true,\"message\":\"Thank you! Your answers have been sent to the AP Systems team.\"}",
+        "options": { "responseCode": 200 }
+      },
+      "id": "bvh-0004-0004-0004-000000000004",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [960, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Format Email", "type": "main", "index": 0 }]]
+    },
+    "Format Email": {
+      "main": [[{ "node": "Send Email", "type": "main", "index": 0 }]]
+    },
+    "Send Email": {
+      "main": [[{ "node": "Respond Success", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "tags": []
+}
