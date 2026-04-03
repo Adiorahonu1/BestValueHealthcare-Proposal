@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Agents Pipeline — AI Lead Generation & Automation Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ─── LOADER ─────────────────────────────────────────────── -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">THE <span>AP</span></div>
+      <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+      <div class="loader-status">INITIALISING SYSTEM</div>
+    </div>
+  </div>
+
+  <!-- ─── NAV ───────────────────────────────────────────────── -->
+  <nav id="main-nav">
+    <a href="#" class="nav-logo">THE <span>AP</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#results">Results</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#cta" class="nav-cta">Book a Call</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#results">Results</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cta" class="mobile-cta">Book a Call</a>
+  </div>
+
+  <!-- ─── HERO (standalone, no canvas) ─────────────────────── -->
+  <section id="hero">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span>AI AUTOMATION SYSTEMS</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="hero-headline">
+        <span class="line line-1">CLOSE MORE.</span>
+        <span class="line line-2">WORK LESS.</span>
+      </h1>
+      <p class="hero-sub">We engineer AI automation systems that qualify leads, book appointments, and follow up — so your team focuses on closing deals, not chasing prospects.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Book a Strategy Call</a>
+        <a href="#process" class="btn-ghost">How It Works →</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-icon">✓</span> Custom-built systems</span>
+        <span class="trust-item"><span class="trust-icon">✓</span> Full CRM integration</span>
+        <span class="trust-item"><span class="trust-icon">✓</span> Done-for-you setup</span>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <!-- ─── CANVAS LAYER (fixed) ──────────────────────────────── -->
+  <canvas id="main-canvas"></canvas>
+  <div id="dark-overlay"></div>
+  <div id="accent-overlay"></div>
+
+  <!-- ─── HORIZONTAL MARQUEE (fixed, inside scroll zone) ───── -->
+  <div id="marquee-wrap">
+    <div id="marquee-track">
+      <span>AUTOMATE · QUALIFY · FOLLOW UP · BOOK · CONVERT · SCALE · AUTOMATE · QUALIFY · FOLLOW UP · BOOK · CONVERT · SCALE ·</span>
+    </div>
+  </div>
+
+  <!-- ─── CANVAS SCROLL CONTAINER ──────────────────────────── -->
+  <div id="scroll-container">
+
+    <!-- Section 1: Problem — enter 10%, leave 24% -->
+    <section class="scroll-section section-content align-left"
+             data-enter="10" data-leave="25" data-animation="slide-right">
+      <div class="section-inner">
+        <div class="section-tag">01 / THE PROBLEM</div>
+        <h2 class="section-headline">YOUR LEADS<br>ARE LEAKING.</h2>
+        <div class="pain-list">
+          <div class="pain-item"><span class="pain-num">01</span><p>Leads come in, nobody follows up fast enough. The deal goes cold.</p></div>
+          <div class="pain-item"><span class="pain-num">02</span><p>Your team wastes hours on unqualified calls and dead-end prospects.</p></div>
+          <div class="pain-item"><span class="pain-num">03</span><p>Disconnected tools mean no visibility on where leads actually stand.</p></div>
+          <div class="pain-item"><span class="pain-num">04</span><p>You paid for traffic. Slow follow-up just made it money down the drain.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Solution — enter 25%, leave 40% -->
+    <section class="scroll-section section-content align-right"
+             data-enter="25" data-leave="40" data-animation="slide-left">
+      <div class="section-inner">
+        <div class="section-tag">02 / THE SOLUTION</div>
+        <h2 class="section-headline">THE AGENTS PIPELINE<br>ENGINE.</h2>
+        <p class="section-body">We design and build AI-powered automation systems that run your full lead lifecycle — from first touch to booked appointment — without manual effort.</p>
+        <div class="pillar-grid">
+          <div class="pillar"><div class="pillar-icon">◈</div><span>AI Outreach</span></div>
+          <div class="pillar"><div class="pillar-icon">◈</div><span>Auto-Qualify</span></div>
+          <div class="pillar"><div class="pillar-icon">◈</div><span>Smart Follow-Up</span></div>
+          <div class="pillar"><div class="pillar-icon">◈</div><span>Auto-Book</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: How It Works — enter 40%, leave 55% -->
+    <section class="scroll-section section-content align-left"
+             data-enter="40" data-leave="55" data-animation="fade-up">
+      <div class="section-inner">
+        <div class="section-tag">03 / HOW IT WORKS</div>
+        <h2 class="section-headline">FOUR STEPS<br>TO AUTOPILOT.</h2>
+        <div class="steps-list">
+          <div class="step">
+            <span class="step-num">01</span>
+            <div class="step-content">
+              <strong>We Map Your Process</strong>
+              <p>Deep dive into your current lead flow, sales process, and tools in use.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">02</span>
+            <div class="step-content">
+              <strong>We Build the System</strong>
+              <p>Custom-engineered AI automation tailored to your business — not a template.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">03</span>
+            <div class="step-content">
+              <strong>We Connect Everything</strong>
+              <p>CRM, calendar, messaging, email — all integrated and talking to each other.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-num">04</span>
+            <div class="step-content">
+              <strong>You Close Deals</strong>
+              <p>Leads qualify themselves and land on your calendar. You focus on revenue.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Stats — enter 55%, leave 70% -->
+    <section class="scroll-section section-stats"
+             data-enter="55" data-leave="70" data-animation="stagger-up">
+      <div class="section-inner stats-inner">
+        <div class="stat-card">
+          <div class="stat-value"><span class="stat-number" data-value="5" data-decimals="0">0</span>×</div>
+          <div class="stat-label">Faster Lead Response</div>
+          <div class="stat-context">vs. manual follow-up</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><span class="stat-number" data-value="60" data-decimals="0">0</span>%</div>
+          <div class="stat-label">Reduction in No-Shows</div>
+          <div class="stat-context">with automated reminders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value"><span class="stat-number" data-value="3" data-decimals="0">0</span>×</div>
+          <div class="stat-label">More Qualified Meetings</div>
+          <div class="stat-context">from the same pipeline</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Services — enter 70%, leave 85% -->
+    <section class="scroll-section section-content align-right"
+             data-enter="70" data-leave="85" data-animation="clip-reveal">
+      <div class="section-inner">
+        <div class="section-tag">05 / WHAT WE BUILD</div>
+        <h2 class="section-headline">OUR CORE<br>SYSTEMS.</h2>
+        <div class="service-list">
+          <div class="service-item"><span class="s-arrow">→</span><span>AI Lead Generation Systems</span></div>
+          <div class="service-item"><span class="s-arrow">→</span><span>AI Appointment Booking</span></div>
+          <div class="service-item"><span class="s-arrow">→</span><span>Lead Qualification Engines</span></div>
+          <div class="service-item"><span class="s-arrow">→</span><span>CRM + Follow-Up Automation</span></div>
+          <div class="service-item"><span class="s-arrow">→</span><span>Custom Workflow Integration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Final Canvas CTA — enter 85%, leave 100% -->
+    <section class="scroll-section section-cta-canvas"
+             data-enter="85" data-leave="100" data-animation="scale-up" data-persist="true">
+      <div class="section-inner cta-inner">
+        <div class="cta-tag">READY TO SCALE?</div>
+        <h2 class="cta-headline">LET'S BUILD<br>YOUR ENGINE.</h2>
+        <p class="cta-sub">One conversation. We'll map exactly what your automation system needs to look like and what it could mean for your revenue.</p>
+        <a href="#cta" class="btn-primary btn-large">Book a Strategy Call</a>
+      </div>
+    </section>
+
+  </div><!-- /#scroll-container -->
+
+  <!-- ─── POST-SCROLL STATIC SECTIONS ───────────────────────── -->
+
+  <!-- Trust Strip -->
+  <section class="trust-strip" id="trust">
+    <div class="container">
+      <p class="trust-label">BUILT FOR GROWTH-FOCUSED BUSINESSES</p>
+      <div class="trust-logos">
+        <div class="trust-pill">Insurance Agencies</div>
+        <div class="trust-pill">Financial Advisors</div>
+        <div class="trust-pill">Real Estate Teams</div>
+        <div class="trust-pill">B2B Service Firms</div>
+        <div class="trust-pill">Local Businesses</div>
+        <div class="trust-pill">Agency Owners</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag-static">WHAT WE BUILD</div>
+        <h2 class="section-title">Systems That Replace<br>Manual Work</h2>
+        <p class="section-intro">Every system is custom-built around your workflow. No off-the-shelf tools. No generic setups.</p>
+      </div>
+      <div class="services-grid">
+        <div class="svc-card reveal-up">
+          <div class="svc-number">01</div>
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 24h8M28 24h8M24 12v8M24 28v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="4" fill="currentColor" opacity=".3"/>
+            </svg>
+          </div>
+          <h3>AI Lead Generation</h3>
+          <p>Automated outreach systems that attract and capture qualified leads from multiple channels simultaneously.</p>
+          <div class="svc-outcome">Outcome: More leads. Less ad waste.</div>
+        </div>
+        <div class="svc-card reveal-up">
+          <div class="svc-number">02</div>
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="14" width="32" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 22l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 30l8 8M40 30l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+            </svg>
+          </div>
+          <h3>AI Appointment Booking</h3>
+          <p>Intelligent scheduling automation that books qualified prospects directly into your calendar without back-and-forth.</p>
+          <div class="svc-outcome">Outcome: Full calendar. Zero scheduling friction.</div>
+        </div>
+        <div class="svc-card reveal-up">
+          <div class="svc-number">03</div>
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 16l16-8 16 8v16l-16 8L8 32V16z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 16l16 8m0 0l16-8M24 24v16" stroke="currentColor" stroke-width="1.5" opacity=".4"/>
+            </svg>
+          </div>
+          <h3>Lead Qualification Engine</h3>
+          <p>AI-powered qualification flows that score, segment, and route leads based on your exact ideal client profile.</p>
+          <div class="svc-outcome">Outcome: Only qualified leads reach your team.</div>
+        </div>
+        <div class="svc-card reveal-up">
+          <div class="svc-number">04</div>
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="24" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="36" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="36" cy="36" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M17 22l14-8M17 26l14 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+            </svg>
+          </div>
+          <h3>CRM + Follow-Up Automation</h3>
+          <p>Automated multi-touch follow-up sequences that nurture leads through your pipeline with perfect timing.</p>
+          <div class="svc-outcome">Outcome: No lead slips through the cracks.</div>
+        </div>
+        <div class="svc-card reveal-up">
+          <div class="svc-number">05</div>
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="6" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="28" y="6" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="6" y="28" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="28" y="28" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M20 13h8M13 20v8M35 20v8M20 35h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+            </svg>
+          </div>
+          <h3>Custom Workflow Integration</h3>
+          <p>We connect your entire tech stack — CRM, email, SMS, calendar, ads — into one seamless automated system.</p>
+          <div class="svc-outcome">Outcome: All your tools work as one.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="why-section" id="results">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-left reveal-up">
+          <div class="section-tag-static">WHY THE AGENTS PIPELINE</div>
+          <h2 class="section-title">We Build Systems.<br>Not Slide Decks.</h2>
+          <p>Most agencies hand you a strategy document and disappear. We stay until your automation is live, tested, and generating results.</p>
+          <a href="#cta" class="btn-primary" style="margin-top:2rem;display:inline-block;">Get Started →</a>
+        </div>
+        <div class="why-right">
+          <div class="why-item reveal-up">
+            <div class="why-check">✓</div>
+            <div>
+              <strong>Custom, not templated</strong>
+              <p>Every system is built around your specific workflow, tools, and ideal client — no cookie-cutter solutions.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-up">
+            <div class="why-check">✓</div>
+            <div>
+              <strong>Outcome-obsessed</strong>
+              <p>We measure success in booked calls and closed deals — not vanity metrics or activity reports.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-up">
+            <div class="why-check">✓</div>
+            <div>
+              <strong>Full-stack execution</strong>
+              <p>Strategy, build, integration, testing, and launch. We handle the entire system end-to-end.</p>
+            </div>
+          </div>
+          <div class="why-item reveal-up">
+            <div class="why-check">✓</div>
+            <div>
+              <strong>Built for your industry</strong>
+              <p>We understand the specific lead flow challenges in financial services, insurance, local services, and B2B.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag-static">WHO WE WORK WITH</div>
+        <h2 class="section-title">Built for Your Industry</h2>
+      </div>
+      <div class="industries-grid">
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>Insurance Agencies</h4>
+          <p>Speed-to-lead automation and qualification flows that filter out tire-kickers before they hit your calendar.</p>
+        </div>
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>Financial Advisors</h4>
+          <p>Compliant nurture sequences and appointment booking systems that convert prospects into booked consultations.</p>
+        </div>
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>Local Service Businesses</h4>
+          <p>Capture every inbound inquiry and follow up automatically — never miss a lead from your local ad spend again.</p>
+        </div>
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>Agency Owners</h4>
+          <p>Systemise your own pipeline while delivering automation solutions to your own clients.</p>
+        </div>
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>B2B Service Firms</h4>
+          <p>Outbound AI lead generation combined with intelligent qualification to keep your sales team focused on closeable deals.</p>
+        </div>
+        <div class="ind-card reveal-up">
+          <div class="ind-icon">◈</div>
+          <h4>Consultants &amp; Coaches</h4>
+          <p>Automate discovery calls, intake forms, and follow-up so you can spend time delivering results instead of admin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <div class="section-tag-static">FAQ</div>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal-up">
+          <button class="faq-question">What types of businesses do you work with?</button>
+          <div class="faq-answer"><p>We work with service businesses, agencies, financial services firms, insurance agencies, consultants, and B2B companies that rely on lead generation and appointments to drive revenue. If you have a sales process, we can automate it.</p></div>
+        </div>
+        <div class="faq-item reveal-up">
+          <button class="faq-question">Do you build completely custom systems?</button>
+          <div class="faq-answer"><p>Yes — every system is built from scratch around your specific workflow, tools, and target client. We don't use generic templates or off-the-shelf automation tools that create more problems than they solve.</p></div>
+        </div>
+        <div class="faq-item reveal-up">
+          <button class="faq-question">Can you integrate with our existing CRM?</button>
+          <div class="faq-answer"><p>Absolutely. We integrate with all major CRMs including HubSpot, Salesforce, Go High Level, Pipedrive, Zoho, and more. Your existing tools stay in place — we just make them work together seamlessly.</p></div>
+        </div>
+        <div class="faq-item reveal-up">
+          <button class="faq-question">How long does it take to get set up?</button>
+          <div class="faq-answer"><p>Most systems are live within 2–4 weeks depending on complexity. We move fast because we've built these systems many times before — the discovery and scoping phase is where we invest the most time to ensure accuracy.</p></div>
+        </div>
+        <div class="faq-item reveal-up">
+          <button class="faq-question">Do I need to have existing tools in place?</button>
+          <div class="faq-answer"><p>No. If you're starting from scratch we can recommend and set up the right stack for your business. If you already have tools, we'll work within what you have and fill any gaps.</p></div>
+        </div>
+        <div class="faq-item reveal-up">
+          <button class="faq-question">What makes this different from hiring a VA or using Zapier?</button>
+          <div class="faq-answer"><p>VAs are limited by working hours and human error. Basic automation tools handle simple tasks but can't qualify leads, make decisions, or personalise outreach at scale. Our AI systems work 24/7, handle complex multi-step logic, and improve over time — creating leverage that grows with your business.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="cta">
+    <div class="cta-bg-grid"></div>
+    <div class="container">
+      <div class="final-cta-inner reveal-up">
+        <div class="section-tag-static">START TODAY</div>
+        <h2 class="cta-big-headline">STOP LOSING LEADS.<br>BUILD YOUR SYSTEM.</h2>
+        <p class="cta-big-sub">One strategy call is all it takes to map out exactly what your AI automation system needs to look like — and what it could mean for your pipeline.</p>
+        <div class="cta-actions">
+          <a href="#" class="btn-primary btn-large">Book a Free Strategy Call</a>
+          <div class="cta-note">Free 30-min call · No commitment · Custom roadmap included</div>
+        </div>
+        <div class="cta-trust-row">
+          <span>✓ No contracts</span>
+          <span>✓ Full transparency</span>
+          <span>✓ Results-focused</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">THE <span>AP</span> AI</div>
+          <p>AI automation systems that generate, qualify, and convert leads — automatically.</p>
+          <div class="footer-socials">
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <strong>Services</strong>
+            <a href="#">AI Lead Generation</a>
+            <a href="#">Appointment Booking</a>
+            <a href="#">Lead Qualification</a>
+            <a href="#">CRM Automation</a>
+            <a href="#">Custom Integration</a>
+          </div>
+          <div class="footer-col">
+            <strong>Company</strong>
+            <a href="#">How It Works</a>
+            <a href="#">Results</a>
+            <a href="#">Industries</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
+        <div class="footer-cta-block">
+          <strong>Ready to automate?</strong>
+          <p>Book a free strategy call and get a custom roadmap for your AI system.</p>
+          <a href="#cta" class="btn-primary">Book a Call</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 The Agents Pipeline. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
